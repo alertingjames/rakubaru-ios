@@ -1,0 +1,981 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 51;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		046804A6307B8167DF843DBD /* Pods_Rakubaru_RakubaruUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C73E4921214D8C8A0F6EEA1F /* Pods_Rakubaru_RakubaruUITests.framework */; };
+		42C9BB23301A277F403DAC1A /* Pods_RakubaruTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DC96713892629D1BCDD0BCAD /* Pods_RakubaruTests.framework */; };
+		6535C1A825708E7000CA6BF1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6535C1A725708E7000CA6BF1 /* AppDelegate.swift */; };
+		6535C1AA25708E7000CA6BF1 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6535C1A925708E7000CA6BF1 /* SceneDelegate.swift */; };
+		6535C1AC25708E7000CA6BF1 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6535C1AB25708E7000CA6BF1 /* ViewController.swift */; };
+		6535C1AF25708E7000CA6BF1 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6535C1AD25708E7000CA6BF1 /* Main.storyboard */; };
+		6535C1B225708E7000CA6BF1 /* Rakubaru.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 6535C1B025708E7000CA6BF1 /* Rakubaru.xcdatamodeld */; };
+		6535C1B425708E7100CA6BF1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6535C1B325708E7100CA6BF1 /* Assets.xcassets */; };
+		6535C1B725708E7100CA6BF1 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6535C1B525708E7100CA6BF1 /* LaunchScreen.storyboard */; };
+		6535C1C225708E7100CA6BF1 /* RakubaruTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6535C1C125708E7100CA6BF1 /* RakubaruTests.swift */; };
+		6535C1CD25708E7100CA6BF1 /* RakubaruUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6535C1CC25708E7100CA6BF1 /* RakubaruUITests.swift */; };
+		6535C203257094D900CA6BF1 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6535C202257094D900CA6BF1 /* BaseViewController.swift */; };
+		6535C20A257096F200CA6BF1 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6535C209257096F200CA6BF1 /* LoginViewController.swift */; };
+		6535C20F2570970800CA6BF1 /* ForgotPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6535C20E2570970800CA6BF1 /* ForgotPasswordViewController.swift */; };
+		6535C2142570972800CA6BF1 /* ResetPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6535C2132570972800CA6BF1 /* ResetPasswordViewController.swift */; };
+		6535C2192570973A00CA6BF1 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6535C2182570973A00CA6BF1 /* HomeViewController.swift */; };
+		6535C21E2570975300CA6BF1 /* ReportsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6535C21D2570975300CA6BF1 /* ReportsViewController.swift */; };
+		6535C2232570976900CA6BF1 /* MyRoutesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6535C2222570976900CA6BF1 /* MyRoutesViewController.swift */; };
+		6535C228257097AB00CA6BF1 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6535C227257097AB00CA6BF1 /* ProfileViewController.swift */; };
+		6535C230257097F700CA6BF1 /* RouteMapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6535C22F257097F700CA6BF1 /* RouteMapViewController.swift */; };
+		6535C2352570980B00CA6BF1 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6535C2342570980B00CA6BF1 /* SettingsViewController.swift */; };
+		6535C23B2570989400CA6BF1 /* RouteCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6535C23A2570989400CA6BF1 /* RouteCell.swift */; };
+		6535C244257098C100CA6BF1 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6535C243257098C100CA6BF1 /* User.swift */; };
+		6535C24925709A0800CA6BF1 /* Route.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6535C24825709A0800CA6BF1 /* Route.swift */; };
+		6535C24E25709A9800CA6BF1 /* Point.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6535C24D25709A9800CA6BF1 /* Point.swift */; };
+		6535C25425709B8D00CA6BF1 /* Commons.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6535C25325709B8D00CA6BF1 /* Commons.swift */; };
+		6535C2642570C77600CA6BF1 /* APIs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6535C2632570C77600CA6BF1 /* APIs.swift */; };
+		6535C26A2571443700CA6BF1 /* RouteListButtons.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6535C2692571443700CA6BF1 /* RouteListButtons.swift */; };
+		6535C29D2572CD0B00CA6BF1 /* RouteSaveBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6535C29C2572CD0B00CA6BF1 /* RouteSaveBox.swift */; };
+		6535C2A22572CD2F00CA6BF1 /* PinSaveBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6535C2A12572CD2F00CA6BF1 /* PinSaveBox.swift */; };
+		6535C2A72572DAA900CA6BF1 /* QuestionDialog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6535C2A62572DAA900CA6BF1 /* QuestionDialog.swift */; };
+		6535C2AF2572EA2A00CA6BF1 /* LoadingDialog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6535C2AE2572EA2A00CA6BF1 /* LoadingDialog.swift */; };
+		657779172583E0220000C6AC /* HelpBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 657779162583E0220000C6AC /* HelpBox.swift */; };
+		659BDC4C2574F01B007F1601 /* HintBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 659BDC4B2574F01B007F1601 /* HintBox.swift */; };
+		8E0D9B89502F10FA61007724 /* Pods_Rakubaru.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E950344389BB607FF5780C14 /* Pods_Rakubaru.framework */; };
+		BE0460EC262DCB4B0027936C /* Reachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE0460EB262DCB4B0027936C /* Reachability.swift */; };
+		BE32EC362603CF3C00A0835C /* AreasViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE32EC352603CF3C00A0835C /* AreasViewController.swift */; };
+		BE32EC3B2603D90000A0835C /* AreaCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE32EC3A2603D90000A0835C /* AreaCell.swift */; };
+		BE32EC402603DB8B00A0835C /* Area.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE32EC3F2603DB8B00A0835C /* Area.swift */; };
+		BE32EC452603DCF100A0835C /* Subloc.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE32EC442603DCF100A0835C /* Subloc.swift */; };
+		BE654F65261B0DC800691284 /* LocResp.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE654F64261B0DC800691284 /* LocResp.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		6535C1BE25708E7100CA6BF1 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 6535C19C25708E7000CA6BF1 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 6535C1A325708E7000CA6BF1;
+			remoteInfo = Rakubaru;
+		};
+		6535C1C925708E7100CA6BF1 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 6535C19C25708E7000CA6BF1 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 6535C1A325708E7000CA6BF1;
+			remoteInfo = Rakubaru;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		02F0EB44523AE928C0D1C1DB /* Pods-RakubaruTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RakubaruTests.release.xcconfig"; path = "Target Support Files/Pods-RakubaruTests/Pods-RakubaruTests.release.xcconfig"; sourceTree = "<group>"; };
+		18E0F2C66345257AFE96D7B8 /* Pods-Rakubaru-RakubaruUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Rakubaru-RakubaruUITests.debug.xcconfig"; path = "Target Support Files/Pods-Rakubaru-RakubaruUITests/Pods-Rakubaru-RakubaruUITests.debug.xcconfig"; sourceTree = "<group>"; };
+		6535C1A425708E7000CA6BF1 /* Rakubaru.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Rakubaru.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		6535C1A725708E7000CA6BF1 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		6535C1A925708E7000CA6BF1 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
+		6535C1AB25708E7000CA6BF1 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		6535C1AE25708E7000CA6BF1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		6535C1B125708E7000CA6BF1 /* Rakubaru.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Rakubaru.xcdatamodel; sourceTree = "<group>"; };
+		6535C1B325708E7100CA6BF1 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		6535C1B625708E7100CA6BF1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		6535C1B825708E7100CA6BF1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		6535C1BD25708E7100CA6BF1 /* RakubaruTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = RakubaruTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		6535C1C125708E7100CA6BF1 /* RakubaruTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RakubaruTests.swift; sourceTree = "<group>"; };
+		6535C1C325708E7100CA6BF1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		6535C1C825708E7100CA6BF1 /* RakubaruUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = RakubaruUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		6535C1CC25708E7100CA6BF1 /* RakubaruUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RakubaruUITests.swift; sourceTree = "<group>"; };
+		6535C1CE25708E7100CA6BF1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		6535C202257094D900CA6BF1 /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
+		6535C209257096F200CA6BF1 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		6535C20E2570970800CA6BF1 /* ForgotPasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgotPasswordViewController.swift; sourceTree = "<group>"; };
+		6535C2132570972800CA6BF1 /* ResetPasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResetPasswordViewController.swift; sourceTree = "<group>"; };
+		6535C2182570973A00CA6BF1 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
+		6535C21D2570975300CA6BF1 /* ReportsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportsViewController.swift; sourceTree = "<group>"; };
+		6535C2222570976900CA6BF1 /* MyRoutesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyRoutesViewController.swift; sourceTree = "<group>"; };
+		6535C227257097AB00CA6BF1 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
+		6535C22F257097F700CA6BF1 /* RouteMapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RouteMapViewController.swift; sourceTree = "<group>"; };
+		6535C2342570980B00CA6BF1 /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
+		6535C23A2570989400CA6BF1 /* RouteCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RouteCell.swift; sourceTree = "<group>"; };
+		6535C243257098C100CA6BF1 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		6535C24825709A0800CA6BF1 /* Route.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Route.swift; sourceTree = "<group>"; };
+		6535C24D25709A9800CA6BF1 /* Point.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Point.swift; sourceTree = "<group>"; };
+		6535C25325709B8D00CA6BF1 /* Commons.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Commons.swift; sourceTree = "<group>"; };
+		6535C2632570C77600CA6BF1 /* APIs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIs.swift; sourceTree = "<group>"; };
+		6535C2692571443700CA6BF1 /* RouteListButtons.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RouteListButtons.swift; sourceTree = "<group>"; };
+		6535C29C2572CD0B00CA6BF1 /* RouteSaveBox.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RouteSaveBox.swift; sourceTree = "<group>"; };
+		6535C2A12572CD2F00CA6BF1 /* PinSaveBox.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PinSaveBox.swift; sourceTree = "<group>"; };
+		6535C2A62572DAA900CA6BF1 /* QuestionDialog.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionDialog.swift; sourceTree = "<group>"; };
+		6535C2AE2572EA2A00CA6BF1 /* LoadingDialog.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingDialog.swift; sourceTree = "<group>"; };
+		657779162583E0220000C6AC /* HelpBox.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HelpBox.swift; sourceTree = "<group>"; };
+		659BDC4B2574F01B007F1601 /* HintBox.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HintBox.swift; sourceTree = "<group>"; };
+		6C5501D28DB28440214F9EA2 /* Pods-Rakubaru.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Rakubaru.debug.xcconfig"; path = "Target Support Files/Pods-Rakubaru/Pods-Rakubaru.debug.xcconfig"; sourceTree = "<group>"; };
+		B65B6B70AE9EC7374B157CAC /* Pods-Rakubaru-RakubaruUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Rakubaru-RakubaruUITests.release.xcconfig"; path = "Target Support Files/Pods-Rakubaru-RakubaruUITests/Pods-Rakubaru-RakubaruUITests.release.xcconfig"; sourceTree = "<group>"; };
+		BE0460EB262DCB4B0027936C /* Reachability.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reachability.swift; sourceTree = "<group>"; };
+		BE32EC352603CF3C00A0835C /* AreasViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AreasViewController.swift; sourceTree = "<group>"; };
+		BE32EC3A2603D90000A0835C /* AreaCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AreaCell.swift; sourceTree = "<group>"; };
+		BE32EC3F2603DB8B00A0835C /* Area.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Area.swift; sourceTree = "<group>"; };
+		BE32EC442603DCF100A0835C /* Subloc.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Subloc.swift; sourceTree = "<group>"; };
+		BE654F64261B0DC800691284 /* LocResp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocResp.swift; sourceTree = "<group>"; };
+		C73E4921214D8C8A0F6EEA1F /* Pods_Rakubaru_RakubaruUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Rakubaru_RakubaruUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		DC96713892629D1BCDD0BCAD /* Pods_RakubaruTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_RakubaruTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		E47D3D265968A6C9DBB26AF7 /* Pods-Rakubaru.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Rakubaru.release.xcconfig"; path = "Target Support Files/Pods-Rakubaru/Pods-Rakubaru.release.xcconfig"; sourceTree = "<group>"; };
+		E950344389BB607FF5780C14 /* Pods_Rakubaru.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Rakubaru.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		E9FF8FF52A41660DF36E520D /* Pods-RakubaruTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RakubaruTests.debug.xcconfig"; path = "Target Support Files/Pods-RakubaruTests/Pods-RakubaruTests.debug.xcconfig"; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		6535C1A125708E7000CA6BF1 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8E0D9B89502F10FA61007724 /* Pods_Rakubaru.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		6535C1BA25708E7100CA6BF1 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				42C9BB23301A277F403DAC1A /* Pods_RakubaruTests.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		6535C1C525708E7100CA6BF1 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				046804A6307B8167DF843DBD /* Pods_Rakubaru_RakubaruUITests.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		13EBDDE6D7216D8C71DA7BD7 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				6C5501D28DB28440214F9EA2 /* Pods-Rakubaru.debug.xcconfig */,
+				E47D3D265968A6C9DBB26AF7 /* Pods-Rakubaru.release.xcconfig */,
+				18E0F2C66345257AFE96D7B8 /* Pods-Rakubaru-RakubaruUITests.debug.xcconfig */,
+				B65B6B70AE9EC7374B157CAC /* Pods-Rakubaru-RakubaruUITests.release.xcconfig */,
+				E9FF8FF52A41660DF36E520D /* Pods-RakubaruTests.debug.xcconfig */,
+				02F0EB44523AE928C0D1C1DB /* Pods-RakubaruTests.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
+		5F5439B32E2D70CEDA0A0BC9 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				E950344389BB607FF5780C14 /* Pods_Rakubaru.framework */,
+				C73E4921214D8C8A0F6EEA1F /* Pods_Rakubaru_RakubaruUITests.framework */,
+				DC96713892629D1BCDD0BCAD /* Pods_RakubaruTests.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		6535C19B25708E7000CA6BF1 = {
+			isa = PBXGroup;
+			children = (
+				6535C1A625708E7000CA6BF1 /* Rakubaru */,
+				6535C1C025708E7100CA6BF1 /* RakubaruTests */,
+				6535C1CB25708E7100CA6BF1 /* RakubaruUITests */,
+				6535C1A525708E7000CA6BF1 /* Products */,
+				13EBDDE6D7216D8C71DA7BD7 /* Pods */,
+				5F5439B32E2D70CEDA0A0BC9 /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		6535C1A525708E7000CA6BF1 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				6535C1A425708E7000CA6BF1 /* Rakubaru.app */,
+				6535C1BD25708E7100CA6BF1 /* RakubaruTests.xctest */,
+				6535C1C825708E7100CA6BF1 /* RakubaruUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		6535C1A625708E7000CA6BF1 /* Rakubaru */ = {
+			isa = PBXGroup;
+			children = (
+				6535C2082570951400CA6BF1 /* Applications */,
+				6535C25225709B4E00CA6BF1 /* Globals */,
+				BE0460EA262DCB2E0027936C /* Classes */,
+				6535C2392570986900CA6BF1 /* Cells */,
+				6535C207257094F000CA6BF1 /* ViewControllers */,
+				6535C242257098AA00CA6BF1 /* Models */,
+				6535C1B325708E7100CA6BF1 /* Assets.xcassets */,
+				6535C1AD25708E7000CA6BF1 /* Main.storyboard */,
+				6535C1B525708E7100CA6BF1 /* LaunchScreen.storyboard */,
+				6535C1B825708E7100CA6BF1 /* Info.plist */,
+				6535C1B025708E7000CA6BF1 /* Rakubaru.xcdatamodeld */,
+			);
+			path = Rakubaru;
+			sourceTree = "<group>";
+		};
+		6535C1C025708E7100CA6BF1 /* RakubaruTests */ = {
+			isa = PBXGroup;
+			children = (
+				6535C1C125708E7100CA6BF1 /* RakubaruTests.swift */,
+				6535C1C325708E7100CA6BF1 /* Info.plist */,
+			);
+			path = RakubaruTests;
+			sourceTree = "<group>";
+		};
+		6535C1CB25708E7100CA6BF1 /* RakubaruUITests */ = {
+			isa = PBXGroup;
+			children = (
+				6535C1CC25708E7100CA6BF1 /* RakubaruUITests.swift */,
+				6535C1CE25708E7100CA6BF1 /* Info.plist */,
+			);
+			path = RakubaruUITests;
+			sourceTree = "<group>";
+		};
+		6535C207257094F000CA6BF1 /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				6535C268257143E700CA6BF1 /* Frames */,
+				6535C202257094D900CA6BF1 /* BaseViewController.swift */,
+				6535C1AB25708E7000CA6BF1 /* ViewController.swift */,
+				6535C209257096F200CA6BF1 /* LoginViewController.swift */,
+				6535C20E2570970800CA6BF1 /* ForgotPasswordViewController.swift */,
+				6535C2132570972800CA6BF1 /* ResetPasswordViewController.swift */,
+				6535C2182570973A00CA6BF1 /* HomeViewController.swift */,
+				6535C21D2570975300CA6BF1 /* ReportsViewController.swift */,
+				6535C2222570976900CA6BF1 /* MyRoutesViewController.swift */,
+				6535C227257097AB00CA6BF1 /* ProfileViewController.swift */,
+				6535C22F257097F700CA6BF1 /* RouteMapViewController.swift */,
+				6535C2342570980B00CA6BF1 /* SettingsViewController.swift */,
+				BE32EC352603CF3C00A0835C /* AreasViewController.swift */,
+			);
+			path = ViewControllers;
+			sourceTree = "<group>";
+		};
+		6535C2082570951400CA6BF1 /* Applications */ = {
+			isa = PBXGroup;
+			children = (
+				6535C1A925708E7000CA6BF1 /* SceneDelegate.swift */,
+				6535C1A725708E7000CA6BF1 /* AppDelegate.swift */,
+			);
+			path = Applications;
+			sourceTree = "<group>";
+		};
+		6535C2392570986900CA6BF1 /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				6535C23A2570989400CA6BF1 /* RouteCell.swift */,
+				BE32EC3A2603D90000A0835C /* AreaCell.swift */,
+			);
+			path = Cells;
+			sourceTree = "<group>";
+		};
+		6535C242257098AA00CA6BF1 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				6535C243257098C100CA6BF1 /* User.swift */,
+				6535C24825709A0800CA6BF1 /* Route.swift */,
+				6535C24D25709A9800CA6BF1 /* Point.swift */,
+				BE32EC3F2603DB8B00A0835C /* Area.swift */,
+				BE32EC442603DCF100A0835C /* Subloc.swift */,
+				BE654F64261B0DC800691284 /* LocResp.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		6535C25225709B4E00CA6BF1 /* Globals */ = {
+			isa = PBXGroup;
+			children = (
+				6535C25325709B8D00CA6BF1 /* Commons.swift */,
+				6535C2632570C77600CA6BF1 /* APIs.swift */,
+			);
+			path = Globals;
+			sourceTree = "<group>";
+		};
+		6535C268257143E700CA6BF1 /* Frames */ = {
+			isa = PBXGroup;
+			children = (
+				6535C2692571443700CA6BF1 /* RouteListButtons.swift */,
+				6535C29C2572CD0B00CA6BF1 /* RouteSaveBox.swift */,
+				6535C2A12572CD2F00CA6BF1 /* PinSaveBox.swift */,
+				6535C2A62572DAA900CA6BF1 /* QuestionDialog.swift */,
+				6535C2AE2572EA2A00CA6BF1 /* LoadingDialog.swift */,
+				659BDC4B2574F01B007F1601 /* HintBox.swift */,
+				657779162583E0220000C6AC /* HelpBox.swift */,
+			);
+			path = Frames;
+			sourceTree = "<group>";
+		};
+		BE0460EA262DCB2E0027936C /* Classes */ = {
+			isa = PBXGroup;
+			children = (
+				BE0460EB262DCB4B0027936C /* Reachability.swift */,
+			);
+			path = Classes;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		6535C1A325708E7000CA6BF1 /* Rakubaru */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 6535C1D125708E7100CA6BF1 /* Build configuration list for PBXNativeTarget "Rakubaru" */;
+			buildPhases = (
+				7543D69505F03EF5AB29EE26 /* [CP] Check Pods Manifest.lock */,
+				6535C1A025708E7000CA6BF1 /* Sources */,
+				6535C1A125708E7000CA6BF1 /* Frameworks */,
+				6535C1A225708E7000CA6BF1 /* Resources */,
+				812C03E36FF89F8457C5F596 /* [CP] Embed Pods Frameworks */,
+				0A4CD20A018D407002345949 /* [CP] Copy Pods Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Rakubaru;
+			productName = Rakubaru;
+			productReference = 6535C1A425708E7000CA6BF1 /* Rakubaru.app */;
+			productType = "com.apple.product-type.application";
+		};
+		6535C1BC25708E7100CA6BF1 /* RakubaruTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 6535C1D425708E7100CA6BF1 /* Build configuration list for PBXNativeTarget "RakubaruTests" */;
+			buildPhases = (
+				97157AE4528C03B7C7B1CA1F /* [CP] Check Pods Manifest.lock */,
+				6535C1B925708E7100CA6BF1 /* Sources */,
+				6535C1BA25708E7100CA6BF1 /* Frameworks */,
+				6535C1BB25708E7100CA6BF1 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				6535C1BF25708E7100CA6BF1 /* PBXTargetDependency */,
+			);
+			name = RakubaruTests;
+			productName = RakubaruTests;
+			productReference = 6535C1BD25708E7100CA6BF1 /* RakubaruTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		6535C1C725708E7100CA6BF1 /* RakubaruUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 6535C1D725708E7100CA6BF1 /* Build configuration list for PBXNativeTarget "RakubaruUITests" */;
+			buildPhases = (
+				C0BCE60EB63C251C66D57472 /* [CP] Check Pods Manifest.lock */,
+				6535C1C425708E7100CA6BF1 /* Sources */,
+				6535C1C525708E7100CA6BF1 /* Frameworks */,
+				6535C1C625708E7100CA6BF1 /* Resources */,
+				7A4D2CA2A39948DF9DC9BEDA /* [CP] Embed Pods Frameworks */,
+				9BCCD3CCD4644CC046DA78F9 /* [CP] Copy Pods Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				6535C1CA25708E7100CA6BF1 /* PBXTargetDependency */,
+			);
+			name = RakubaruUITests;
+			productName = RakubaruUITests;
+			productReference = 6535C1C825708E7100CA6BF1 /* RakubaruUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		6535C19C25708E7000CA6BF1 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 1220;
+				LastUpgradeCheck = 1220;
+				TargetAttributes = {
+					6535C1A325708E7000CA6BF1 = {
+						CreatedOnToolsVersion = 12.2;
+					};
+					6535C1BC25708E7100CA6BF1 = {
+						CreatedOnToolsVersion = 12.2;
+						TestTargetID = 6535C1A325708E7000CA6BF1;
+					};
+					6535C1C725708E7100CA6BF1 = {
+						CreatedOnToolsVersion = 12.2;
+						TestTargetID = 6535C1A325708E7000CA6BF1;
+					};
+				};
+			};
+			buildConfigurationList = 6535C19F25708E7000CA6BF1 /* Build configuration list for PBXProject "Rakubaru" */;
+			compatibilityVersion = "Xcode 9.3";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 6535C19B25708E7000CA6BF1;
+			productRefGroup = 6535C1A525708E7000CA6BF1 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				6535C1A325708E7000CA6BF1 /* Rakubaru */,
+				6535C1BC25708E7100CA6BF1 /* RakubaruTests */,
+				6535C1C725708E7100CA6BF1 /* RakubaruUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		6535C1A225708E7000CA6BF1 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6535C1B725708E7100CA6BF1 /* LaunchScreen.storyboard in Resources */,
+				6535C1B425708E7100CA6BF1 /* Assets.xcassets in Resources */,
+				6535C1AF25708E7000CA6BF1 /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		6535C1BB25708E7100CA6BF1 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		6535C1C625708E7100CA6BF1 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		0A4CD20A018D407002345949 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Rakubaru/Pods-Rakubaru-resources-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Rakubaru/Pods-Rakubaru-resources-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Rakubaru/Pods-Rakubaru-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		7543D69505F03EF5AB29EE26 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Rakubaru-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		7A4D2CA2A39948DF9DC9BEDA /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Rakubaru-RakubaruUITests/Pods-Rakubaru-RakubaruUITests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Rakubaru-RakubaruUITests/Pods-Rakubaru-RakubaruUITests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Rakubaru-RakubaruUITests/Pods-Rakubaru-RakubaruUITests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		812C03E36FF89F8457C5F596 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Rakubaru/Pods-Rakubaru-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Rakubaru/Pods-Rakubaru-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Rakubaru/Pods-Rakubaru-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		97157AE4528C03B7C7B1CA1F /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-RakubaruTests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		9BCCD3CCD4644CC046DA78F9 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Rakubaru-RakubaruUITests/Pods-Rakubaru-RakubaruUITests-resources-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Rakubaru-RakubaruUITests/Pods-Rakubaru-RakubaruUITests-resources-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Rakubaru-RakubaruUITests/Pods-Rakubaru-RakubaruUITests-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		C0BCE60EB63C251C66D57472 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Rakubaru-RakubaruUITests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		6535C1A025708E7000CA6BF1 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BE654F65261B0DC800691284 /* LocResp.swift in Sources */,
+				6535C20A257096F200CA6BF1 /* LoginViewController.swift in Sources */,
+				6535C2AF2572EA2A00CA6BF1 /* LoadingDialog.swift in Sources */,
+				6535C2232570976900CA6BF1 /* MyRoutesViewController.swift in Sources */,
+				6535C230257097F700CA6BF1 /* RouteMapViewController.swift in Sources */,
+				6535C20F2570970800CA6BF1 /* ForgotPasswordViewController.swift in Sources */,
+				6535C29D2572CD0B00CA6BF1 /* RouteSaveBox.swift in Sources */,
+				659BDC4C2574F01B007F1601 /* HintBox.swift in Sources */,
+				6535C244257098C100CA6BF1 /* User.swift in Sources */,
+				6535C21E2570975300CA6BF1 /* ReportsViewController.swift in Sources */,
+				6535C203257094D900CA6BF1 /* BaseViewController.swift in Sources */,
+				BE32EC402603DB8B00A0835C /* Area.swift in Sources */,
+				6535C2142570972800CA6BF1 /* ResetPasswordViewController.swift in Sources */,
+				6535C228257097AB00CA6BF1 /* ProfileViewController.swift in Sources */,
+				6535C2A22572CD2F00CA6BF1 /* PinSaveBox.swift in Sources */,
+				6535C24925709A0800CA6BF1 /* Route.swift in Sources */,
+				6535C26A2571443700CA6BF1 /* RouteListButtons.swift in Sources */,
+				6535C25425709B8D00CA6BF1 /* Commons.swift in Sources */,
+				6535C1AC25708E7000CA6BF1 /* ViewController.swift in Sources */,
+				657779172583E0220000C6AC /* HelpBox.swift in Sources */,
+				6535C2352570980B00CA6BF1 /* SettingsViewController.swift in Sources */,
+				BE32EC3B2603D90000A0835C /* AreaCell.swift in Sources */,
+				6535C2192570973A00CA6BF1 /* HomeViewController.swift in Sources */,
+				6535C1A825708E7000CA6BF1 /* AppDelegate.swift in Sources */,
+				6535C24E25709A9800CA6BF1 /* Point.swift in Sources */,
+				6535C1B225708E7000CA6BF1 /* Rakubaru.xcdatamodeld in Sources */,
+				BE32EC452603DCF100A0835C /* Subloc.swift in Sources */,
+				BE32EC362603CF3C00A0835C /* AreasViewController.swift in Sources */,
+				6535C1AA25708E7000CA6BF1 /* SceneDelegate.swift in Sources */,
+				BE0460EC262DCB4B0027936C /* Reachability.swift in Sources */,
+				6535C2642570C77600CA6BF1 /* APIs.swift in Sources */,
+				6535C23B2570989400CA6BF1 /* RouteCell.swift in Sources */,
+				6535C2A72572DAA900CA6BF1 /* QuestionDialog.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		6535C1B925708E7100CA6BF1 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6535C1C225708E7100CA6BF1 /* RakubaruTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		6535C1C425708E7100CA6BF1 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6535C1CD25708E7100CA6BF1 /* RakubaruUITests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		6535C1BF25708E7100CA6BF1 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 6535C1A325708E7000CA6BF1 /* Rakubaru */;
+			targetProxy = 6535C1BE25708E7100CA6BF1 /* PBXContainerItemProxy */;
+		};
+		6535C1CA25708E7100CA6BF1 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 6535C1A325708E7000CA6BF1 /* Rakubaru */;
+			targetProxy = 6535C1C925708E7100CA6BF1 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		6535C1AD25708E7000CA6BF1 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				6535C1AE25708E7000CA6BF1 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		6535C1B525708E7100CA6BF1 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				6535C1B625708E7100CA6BF1 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		6535C1CF25708E7100CA6BF1 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.2;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		6535C1D025708E7100CA6BF1 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.2;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		6535C1D225708E7100CA6BF1 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 6C5501D28DB28440214F9EA2 /* Pods-Rakubaru.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 4;
+				DEVELOPMENT_TEAM = 8M42V3ZFZR;
+				INFOPLIST_FILE = Rakubaru/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.3;
+				PRODUCT_BUNDLE_IDENTIFIER = com.app.rakubaru;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		6535C1D325708E7100CA6BF1 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = E47D3D265968A6C9DBB26AF7 /* Pods-Rakubaru.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 4;
+				DEVELOPMENT_TEAM = 8M42V3ZFZR;
+				INFOPLIST_FILE = Rakubaru/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.3;
+				PRODUCT_BUNDLE_IDENTIFIER = com.app.rakubaru;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		6535C1D525708E7100CA6BF1 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = E9FF8FF52A41660DF36E520D /* Pods-RakubaruTests.debug.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = SA36QEKM63;
+				INFOPLIST_FILE = RakubaruTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.2;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = VaCay.RakubaruTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Rakubaru.app/Rakubaru";
+			};
+			name = Debug;
+		};
+		6535C1D625708E7100CA6BF1 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 02F0EB44523AE928C0D1C1DB /* Pods-RakubaruTests.release.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = SA36QEKM63;
+				INFOPLIST_FILE = RakubaruTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.2;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = VaCay.RakubaruTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Rakubaru.app/Rakubaru";
+			};
+			name = Release;
+		};
+		6535C1D825708E7100CA6BF1 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 18E0F2C66345257AFE96D7B8 /* Pods-Rakubaru-RakubaruUITests.debug.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = SA36QEKM63;
+				INFOPLIST_FILE = RakubaruUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = VaCay.RakubaruUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = Rakubaru;
+			};
+			name = Debug;
+		};
+		6535C1D925708E7100CA6BF1 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = B65B6B70AE9EC7374B157CAC /* Pods-Rakubaru-RakubaruUITests.release.xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = SA36QEKM63;
+				INFOPLIST_FILE = RakubaruUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = VaCay.RakubaruUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = Rakubaru;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		6535C19F25708E7000CA6BF1 /* Build configuration list for PBXProject "Rakubaru" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				6535C1CF25708E7100CA6BF1 /* Debug */,
+				6535C1D025708E7100CA6BF1 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		6535C1D125708E7100CA6BF1 /* Build configuration list for PBXNativeTarget "Rakubaru" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				6535C1D225708E7100CA6BF1 /* Debug */,
+				6535C1D325708E7100CA6BF1 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		6535C1D425708E7100CA6BF1 /* Build configuration list for PBXNativeTarget "RakubaruTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				6535C1D525708E7100CA6BF1 /* Debug */,
+				6535C1D625708E7100CA6BF1 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		6535C1D725708E7100CA6BF1 /* Build configuration list for PBXNativeTarget "RakubaruUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				6535C1D825708E7100CA6BF1 /* Debug */,
+				6535C1D925708E7100CA6BF1 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		6535C1B025708E7000CA6BF1 /* Rakubaru.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				6535C1B125708E7000CA6BF1 /* Rakubaru.xcdatamodel */,
+			);
+			currentVersion = 6535C1B125708E7000CA6BF1 /* Rakubaru.xcdatamodel */;
+			path = Rakubaru.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
+	};
+	rootObject = 6535C19C25708E7000CA6BF1 /* Project object */;
+}

@@ -1,0 +1,84 @@
+PODS:
+  - Alamofire (4.9.1)
+  - Auk (11.0.0):
+    - moa
+  - DropDown (2.3.13)
+  - GoogleMaps (4.0.0):
+    - GoogleMaps/Maps (= 4.0.0)
+  - GoogleMaps/Base (4.0.0)
+  - GoogleMaps/Maps (4.0.0):
+    - GoogleMaps/Base
+  - GooglePlaces (4.0.0):
+    - GoogleMaps/Base (= 4.0.0)
+  - IQKeyboardManagerSwift (6.5.6)
+  - Kingfisher (5.15.7):
+    - Kingfisher/Core (= 5.15.7)
+  - Kingfisher/Core (5.15.7)
+  - moa (12.0.0)
+  - OneSignal (2.15.4)
+  - PryntTrimmerView (4.0.2)
+  - SimpleCheckbox (2.1.0)
+  - SteviaLayout (4.7.3)
+  - SwiftyJSON (5.0.0)
+  - TextFieldEffects (1.6.0)
+  - Toast-Swift (5.0.1)
+  - YPImagePicker (4.4.0):
+    - PryntTrimmerView (~> 4.0.2)
+    - SteviaLayout (~> 4.7.3)
+
+DEPENDENCIES:
+  - Alamofire (~> 4.0)
+  - Auk
+  - DropDown
+  - GoogleMaps
+  - GooglePlaces
+  - IQKeyboardManagerSwift
+  - Kingfisher
+  - moa
+  - OneSignal (< 3.0, >= 2.9.3)
+  - SimpleCheckbox
+  - SwiftyJSON
+  - TextFieldEffects
+  - Toast-Swift
+  - YPImagePicker
+
+SPEC REPOS:
+  trunk:
+    - Alamofire
+    - Auk
+    - DropDown
+    - GoogleMaps
+    - GooglePlaces
+    - IQKeyboardManagerSwift
+    - Kingfisher
+    - moa
+    - OneSignal
+    - PryntTrimmerView
+    - SimpleCheckbox
+    - SteviaLayout
+    - SwiftyJSON
+    - TextFieldEffects
+    - Toast-Swift
+    - YPImagePicker
+
+SPEC CHECKSUMS:
+  Alamofire: 85e8a02c69d6020a0d734f6054870d7ecb75cf18
+  Auk: 7cc533252e2caaaa36b2be19c0b799f6057c365a
+  DropDown: 8a2116376c1981888557f72ec2ffc9a5e0e456ec
+  GoogleMaps: b7f7fc569a9b354a3af0d9729dbec40957b7d41e
+  GooglePlaces: ca8d4aba09ba79e0a829cf1dca03a41de6a09016
+  IQKeyboardManagerSwift: c7df9d2deb356c04522f5c4b7b6e4ce4d8ed94fe
+  Kingfisher: 6e1a13523fcb1c86924ce53affe4ac957e544d59
+  moa: e2346f12de6c65bbca4d103950d45db9e46785ef
+  OneSignal: 6647275955d0f06d9e17c90dc93af9d85ecfd2b9
+  PryntTrimmerView: 6a43cc90df5d99addeabd33d4ba09b1365322130
+  SimpleCheckbox: ddcd433ab8c3a8f57300bebda13151a8f302c7f9
+  SteviaLayout: c2ecdcff57d44e38fd2f65e54ad52aeae28ca0c4
+  SwiftyJSON: 36413e04c44ee145039d332b4f4e2d3e8d6c4db7
+  TextFieldEffects: 529b8aff706fb40f82c41c780c0777941a893796
+  Toast-Swift: 9b6a70f28b3bf0b96c40d46c0c4b9d6639846711
+  YPImagePicker: 15aed8bcaa4dad976e11b6114126d731a2f9f3c9
+
+PODFILE CHECKSUM: ec137eac0368eb67d62494ab532aa79ceabbcd4b
+
+COCOAPODS: 1.10.1

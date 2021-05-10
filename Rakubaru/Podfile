@@ -1,0 +1,34 @@
+# Uncomment the next line to define a global platform for your project
+# platform :ios, '9.0'
+
+target 'Rakubaru' do
+  # Comment the next line if you don't want to use dynamic frameworks
+  use_frameworks!
+
+  # Pods for Rakubaru
+
+  target 'RakubaruTests' do
+    inherit! :search_paths
+    # Pods for testing
+  end
+
+  target 'RakubaruUITests' do
+    # Pods for testing
+  end
+
+pod 'Alamofire', '~> 4.0'
+pod 'SwiftyJSON'
+pod 'IQKeyboardManagerSwift'
+pod 'Toast-Swift'
+pod 'Kingfisher'
+pod 'YPImagePicker'
+pod 'moa'
+pod 'Auk'
+pod 'OneSignal', '>= 2.9.3', '< 3.0'
+pod 'GoogleMaps'
+pod 'GooglePlaces'
+pod 'DropDown'
+pod 'TextFieldEffects'
+pod 'SimpleCheckbox'
+
+end
