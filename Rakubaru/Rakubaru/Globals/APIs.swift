@@ -577,6 +577,8 @@ class APIs {
                     handleCallback("0", json["status"].stringValue)
                 }else if (json["result_code"].stringValue == "1") {
                     handleCallback("1", "")
+                }else if (json["result_code"].stringValue == "100") {
+                    handleCallback("100", "")
                 }
                 else{
                     handleCallback("", "Server issue")
@@ -781,7 +783,7 @@ class APIs {
         }
     }
     
-    static func uploadRealTimeRoute(route_id:Int64, assign_id:Int64, member_id: Int64, name:String, description:String, start_time:String, end_time:String, duration:Int64, speed:Double, distance:Double, status:String, lat:Double, lng:Double, comment:String, color:String, pulse:Bool, handleCallback: @escaping (String, String) -> ())
+    static func uploadRealTimeRoute(route_id:Int64, assign_id:Int64, member_id: Int64, name:String, description:String, start_time:String, end_time:String, duration:Int64, speed:Double, distance:Double, status:String, pulse:Bool, handleCallback: @escaping (String, String) -> ())
     {
         //NSLog(url)
         
@@ -802,14 +804,10 @@ class APIs {
             "speed": String(speed),
             "distance": String(distance),
             "status": status,
-            "lat":String(lat),
-            "lng":String(lng),
-            "comment":comment,
-            "color":color,
             "pulse":pulseVal
         ] as [String : Any]
         
-        Alamofire.request(SERVER_URL + "upRTRoute", method: .post, parameters: params).responseJSON { response in
+        Alamofire.request(SERVER_URL + "startorendreporting", method: .post, parameters: params).responseJSON { response in
             
             if response.result.isFailure{
                 handleCallback("", "Server issue")
@@ -817,7 +815,7 @@ class APIs {
             else
             {
                 let json = JSON(response.result.value!)
-                NSLog("Route saving: \(json)")
+                NSLog("ROUTE STARTED OR ENDED: \(json)")
                 if(json["result_code"].stringValue == "0"){
                     handleCallback(json["route_id"].stringValue, json["result_code"].stringValue)
                 }else{

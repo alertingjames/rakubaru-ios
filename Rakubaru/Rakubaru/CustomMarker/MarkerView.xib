@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17506" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17505"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" restorationIdentifier="MarkerView" id="TnK-PM-hWz" customClass="MarkerView" customModule="Adgogeo" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="180" height="60"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <subviews>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="s8d-Kx-FLv">
+                    <rect key="frame" x="10" y="10" width="160" height="20.5"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Time" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pVv-M0-sUw">
+                    <rect key="frame" x="10" y="35.5" width="160" height="20"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="20" id="y4u-e1-Arp"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                    <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <nil key="highlightedColor"/>
+                </label>
+            </subviews>
+            <viewLayoutGuide key="safeArea" id="h35-f1-j3L"/>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <constraints>
+                <constraint firstItem="h35-f1-j3L" firstAttribute="bottom" secondItem="pVv-M0-sUw" secondAttribute="bottom" constant="4.5" id="02Y-vY-xiO"/>
+                <constraint firstAttribute="trailing" secondItem="s8d-Kx-FLv" secondAttribute="trailing" constant="10" id="LXt-9w-mER"/>
+                <constraint firstItem="s8d-Kx-FLv" firstAttribute="top" secondItem="TnK-PM-hWz" secondAttribute="top" constant="10" id="eDW-eI-r0d"/>
+                <constraint firstItem="pVv-M0-sUw" firstAttribute="top" secondItem="s8d-Kx-FLv" secondAttribute="bottom" constant="5" id="elP-pm-Q4U"/>
+                <constraint firstItem="s8d-Kx-FLv" firstAttribute="leading" secondItem="TnK-PM-hWz" secondAttribute="leading" constant="10" id="hJi-D5-0ZD"/>
+                <constraint firstItem="h35-f1-j3L" firstAttribute="trailing" secondItem="pVv-M0-sUw" secondAttribute="trailing" constant="10" id="p9W-3p-odX"/>
+                <constraint firstItem="pVv-M0-sUw" firstAttribute="leading" secondItem="h35-f1-j3L" secondAttribute="leading" constant="10" id="soz-FJ-qNo"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <connections>
+                <outlet property="timeBox" destination="pVv-M0-sUw" id="I2q-zD-mF6"/>
+                <outlet property="titleBox" destination="s8d-Kx-FLv" id="uyr-dm-M0I"/>
+            </connections>
+            <point key="canvasLocation" x="-449.27536231884062" y="31.473214285714285"/>
+        </view>
+    </objects>
+</document>

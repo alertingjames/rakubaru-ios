@@ -321,5 +321,17 @@ class RouteMapViewController: BaseViewController, CLLocationManagerDelegate, GMS
         polygon.map = map
     }
     
+    func mapView(_ mapView: GMSMapView, markerInfoWindow marker: GMSMarker) -> UIView? {
+        if marker.snippet != nil {
+            let infoView:MarkerView = (Bundle.main.loadNibNamed("MarkerView", owner: self, options: nil)!.first as? MarkerView)!
+            let frame = CGRect(x: 10, y: 10, width: 200, height: infoView.frame.height)
+            infoView.frame = frame
+            infoView.titleBox.text = marker.title
+            infoView.timeBox.text = marker.snippet
+            return infoView
+        }else {
+            return nil
+        }
+    }
     
 }

@@ -9,6 +9,7 @@ import UIKit
 import Toast_Swift
 import Kingfisher
 import AVFoundation
+import Network
 
 class BaseViewController: UIViewController, UITextFieldDelegate, UITextViewDelegate {
     
@@ -281,8 +282,13 @@ class BaseViewController: UIViewController, UITextFieldDelegate, UITextViewDeleg
                 }
             }else if result_code == "1" {
                 self.logout()
+            }else if result_code == "100" {
+                self.logout()
             }
         })
+        if(UIApplication.shared.applicationIconBadgeNumber > 0) {
+            UIApplication.shared.applicationIconBadgeNumber = 0
+        }
     }
     
 

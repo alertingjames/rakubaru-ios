@@ -12,8 +12,9 @@ import GooglePlaces
 import CoreLocation
 import AddressBookUI
 import SwiftyJSON
+import Network
 
-class HomeViewController: BaseViewController, CLLocationManagerDelegate, GMSMapViewDelegate{
+class HomeViewController: BaseViewController, CLLocationManagerDelegate, GMSMapViewDelegate, UNUserNotificationCenterDelegate {
     
     var manager = CLLocationManager()
     var map = GMSMapView()
@@ -73,6 +74,10 @@ class HomeViewController: BaseViewController, CLLocationManagerDelegate, GMSMapV
     var routeID:Int64 = 0
     var assignID:Int64 = 0
     
+    var isFirstRoute:Bool = false
+    
+    var userNotificationCenter = UNUserNotificationCenter.current()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -121,6 +126,9 @@ class HomeViewController: BaseViewController, CLLocationManagerDelegate, GMSMapV
         startedTime = 0
         endedTime = 0
         
+        self.userNotificationCenter.delegate = self
+        self.requestNotificationAuthorization()
+        
         // Move this viewcontroller to background by clicking on Home Button
         NotificationCenter.default.addObserver(
             self,
@@ -134,6 +142,20 @@ class HomeViewController: BaseViewController, CLLocationManagerDelegate, GMSMapV
             selector: #selector(appToForeground),
             name: UIApplication.willEnterForegroundNotification,
             object: nil)
+        
+        // Check airplane mode
+        let monitor = NWPathMonitor()
+        monitor.pathUpdateHandler = { path in
+            if path.availableInterfaces.count < 2 {
+                print("Flight mode")
+                if Reachability.isConnectedToNetwork() {
+                    self.sendNotification(title: "警告", body: "ネットワークがアクティブです。 アプリを機内モードにしないでください。")
+                }
+            }
+            print(path.availableInterfaces)
+        }
+        let queue = DispatchQueue.global(qos: .background)
+        monitor.start(queue: queue)
         
     }
     
@@ -161,6 +183,7 @@ class HomeViewController: BaseViewController, CLLocationManagerDelegate, GMSMapV
             }
             speedBox.text = String(format: "%.2f", speed) + "km/h"
             
+            self.isFirstRoute = false
         }
         
         checkDevice(member_id: thisUser.idx, device: getDeviceID())
@@ -264,6 +287,7 @@ class HomeViewController: BaseViewController, CLLocationManagerDelegate, GMSMapV
     func drawRoute(loc:CLLocationCoordinate2D) {
         if isLocationRecording {
             let currentTime = Date().currentTimeMillis()
+            
             if traces.count == 0 {
                 let point = Point()
                 point.lat = thisUserLocation!.latitude
@@ -347,10 +371,12 @@ class HomeViewController: BaseViewController, CLLocationManagerDelegate, GMSMapV
             point.time = String(currentTime)
             point.color = getColorFromSpeed(speed: mSpeed).htmlRGBColor
             traces.append(point)
-            if !Reachability.isConnectedToNetwork() {
-                traces1.append(point)
-                print("Offline traces: \(traces1.count)")
-            }
+            traces1.append(point)
+            
+//            if !Reachability.isConnectedToNetwork() {
+//                traces1.append(point)
+//                print("Offline traces: \(traces1.count)")
+//            }
             
             if traces.count == 2 {
                 traces[0].color = point.color
@@ -360,15 +386,21 @@ class HomeViewController: BaseViewController, CLLocationManagerDelegate, GMSMapV
             let color = getColorFromSpeed(speed: mSpeed).htmlRGBColor
             
             if Reachability.isConnectedToNetwork() {
-                if traces1.count > 0 {
-                    cnt += 1
-                    if cnt > 5 {
-                        upRoute()
-                    }else {
-                        traces1.append(point)
-                    }
+                if self.isFirstRoute {
+                    upRoute()
+                    UserDefaults.standard.setValue(currentTime, forKey: "last_loaded")
                 }else {
-                    uploadRealTimeRoute(route_id: routeID, assign_id: assignID, member_id: thisUser.idx, name: "", description: "", start_time: String(startedTime), end_time: String(endedTime), duration: duration, speed: speed, distance: totalDistance, status: "report", lat: loc.latitude, lng: loc.longitude, comment: "", color: color, end: 1, pulse: pulse)
+                    if traces1.count > 30 {
+                        cnt += 1
+                        if cnt > 5 {
+                            if Int(currentTime) - UserDefaults.standard.integer(forKey: "last_loaded") > 10000 {
+                                upRoute()
+                                UserDefaults.standard.setValue(currentTime, forKey: "last_loaded")
+                            }
+                        }else {
+                            traces1.append(point)
+                        }
+                    }
                 }
             }
             
@@ -456,7 +488,14 @@ class HomeViewController: BaseViewController, CLLocationManagerDelegate, GMSMapV
     
     @IBAction func toggleRecording(_ sender: Any) {
         if isLoading { return }
-        if isLocationRecording {            
+        if isLocationRecording {
+            startBtn.backgroundColor = primaryDarkColor
+            startBtn.layer.cornerRadius = startBtn.frame.height / 2
+            startBtn.setTitleColor(.white, for: .normal)
+            startBtn.setTitle("開始", for: .normal)
+            isLocationRecording = false
+            disableLocationManager()
+            
             routeSaveBox = (self.storyboard!.instantiateViewController(withIdentifier: "RouteSaveBox") as! RouteSaveBox)
             routeSaveBox.view.frame = CGRect(x: 0, y: 0, width: self.screenWidth, height: self.screenHeight)
             routeSaveBox.titleBox.text = "ルートに説明を追加します。"
@@ -472,6 +511,10 @@ class HomeViewController: BaseViewController, CLLocationManagerDelegate, GMSMapV
             }
             self.addChild(self.routeSaveBox)
             self.view.addSubview(self.routeSaveBox.view)
+            
+            if traces1.count > 0 {
+                upRoute()
+            }
             
         }else {
             routeSaveBox = (self.storyboard!.instantiateViewController(withIdentifier: "RouteSaveBox") as! RouteSaveBox)
@@ -512,7 +555,7 @@ class HomeViewController: BaseViewController, CLLocationManagerDelegate, GMSMapV
         endedTime = Date().currentTimeMillis()
         let color = getColorFromSpeed(speed: mSpeed).htmlRGBColor
         
-        self.uploadRealTimeRoute(route_id: self.routeID, assign_id: self.assignID, member_id: thisUser.idx, name: name, description: "", start_time: String(self.startedTime), end_time: String(self.endedTime), duration: self.duration, speed: self.speed, distance: self.totalDistance, status: "report", lat: thisUserLocation!.latitude, lng: thisUserLocation!.longitude, comment: "", color: color, end: 0, pulse: false)
+        self.uploadRealTimeRoute(route_id: self.routeID, assign_id: self.assignID, member_id: thisUser.idx, name: name, description: "", start_time: String(self.startedTime), end_time: String(self.endedTime), duration: self.duration, speed: self.speed, distance: self.totalDistance, status: "report", end: 0, pulse: false)
     }
     
     func enableLocationManager() {
@@ -528,7 +571,7 @@ class HomeViewController: BaseViewController, CLLocationManagerDelegate, GMSMapV
     func endRoute(desc:String) {
         let color:String = getColorFromSpeed(speed: mSpeed).htmlRGBColor
         self.endedTime = Date().currentTimeMillis()
-        self.uploadRealTimeRoute(route_id: self.routeID, assign_id: self.assignID, member_id: thisUser.idx, name: "", description: desc, start_time: String(self.startedTime), end_time: String(self.endedTime), duration: self.duration, speed: self.speed, distance: self.totalDistance, status: "report", lat: self.thisUserLocation!.latitude, lng: self.thisUserLocation!.longitude, comment: "", color: color, end: 2, pulse: false)
+        self.uploadRealTimeRoute(route_id: self.routeID, assign_id: self.assignID, member_id: thisUser.idx, name: "", description: desc, start_time: String(self.startedTime), end_time: String(self.endedTime), duration: self.duration, speed: self.speed, distance: self.totalDistance, status: "report", end: 2, pulse: false)
     }
     
     
@@ -584,7 +627,7 @@ class HomeViewController: BaseViewController, CLLocationManagerDelegate, GMSMapV
                 self.transitionVc(vc: vc, duration: 0.3, type: .fromRight)
             }else {
 //                self.showToast(msg: "何かが間違っている。")
-                print("Result: \(result_code)")
+                print("Result0: \(result_code)")
             }
             
         })
@@ -891,9 +934,9 @@ class HomeViewController: BaseViewController, CLLocationManagerDelegate, GMSMapV
         gArea = Area()
     }
     
-    func uploadRealTimeRoute(route_id:Int64, assign_id:Int64, member_id: Int64, name:String, description:String, start_time:String, end_time:String, duration:Int64, speed:Double, distance:Double, status:String, lat:Double, lng:Double, comment:String, color:String, end:Int, pulse:Bool) {
+    func uploadRealTimeRoute(route_id:Int64, assign_id:Int64, member_id: Int64, name:String, description:String, start_time:String, end_time:String, duration:Int64, speed:Double, distance:Double, status:String, end:Int, pulse:Bool) {
         if end == 0 || end == 2 { self.showLoadingView()}
-        APIs.uploadRealTimeRoute(route_id: route_id, assign_id: assign_id, member_id: member_id, name: name, description: description, start_time: start_time, end_time: end_time, duration: duration, speed: speed, distance: distance, status: status, lat: lat, lng: lng, comment: comment, color: color, pulse: pulse, handleCallback: { [self]
+        APIs.uploadRealTimeRoute(route_id: route_id, assign_id: assign_id, member_id: member_id, name: name, description: description, start_time: start_time, end_time: end_time, duration: duration, speed: speed, distance: distance, status: status, pulse: pulse, handleCallback: { [self]
             route_id, result_code in
             if end == 0 || end == 2 { self.dismissLoadingView() }
             
@@ -902,6 +945,7 @@ class HomeViewController: BaseViewController, CLLocationManagerDelegate, GMSMapV
                 routeID = Int64(route_id)!
                 if end == 0 {
                     clearPolylines()
+                    
                     startBtn.backgroundColor = .red
                     startBtn.layer.cornerRadius = startBtn.frame.height / 2
                     startBtn.setTitleColor(.yellow, for: .normal)
@@ -916,24 +960,30 @@ class HomeViewController: BaseViewController, CLLocationManagerDelegate, GMSMapV
                     distanceBox.text = String(format: "%.2f", 0) + "km"
                     durationBox.text = getDurationFromMilliseconds0(ms: 0)
                     speedBox.text = String(format: "%.2f", 0) + "km/h"
+                    
+                    print("FFFFFFIRST=== \(true)")
+                    
+                    self.isFirstRoute = true
+                    self.drawRoute(loc: self.thisUserLocation!)
 
                 }else {
                     if end == 2 {
     //                    isLoading = false
     //                    savingPoints = 0
                         
-                        startBtn.backgroundColor = primaryDarkColor
-                        startBtn.layer.cornerRadius = startBtn.frame.height / 2
-                        startBtn.setTitleColor(.white, for: .normal)
-                        startBtn.setTitle("開始", for: .normal)
-                        isLocationRecording = false
-                        disableLocationManager()
+//                        startBtn.backgroundColor = primaryDarkColor
+//                        startBtn.layer.cornerRadius = startBtn.frame.height / 2
+//                        startBtn.setTitleColor(.white, for: .normal)
+//                        startBtn.setTitle("開始", for: .normal)
+//                        isLocationRecording = false
+//                        disableLocationManager()
                         
                         if status != "" {
                             showToast2(msg: "正常に送信されました！")
                         }else {
                             showToast2(msg: "保存された")
                         }
+                        
                         let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(identifier: "MyRoutesViewController")
                         gRoutesOption = "reports"
                         self.transitionVc(vc: vc, duration: 0.3, type: .fromRight)
@@ -953,27 +1003,40 @@ class HomeViewController: BaseViewController, CLLocationManagerDelegate, GMSMapV
         
         let params = [
             "route_id":String(routeID),
+            "assign_id":String(self.assignID),
+            "member_id":String(thisUser.idx),
+            "name":"",
+            "description":"",
+            "start_time": String(self.startedTime),
+            "end_time": String(self.endedTime),
+            "duration": String(self.duration),
+            "speed": String(self.speed),
+            "distance": String(self.totalDistance),
+            "status": "report",
+            "pulse":"0"
         ] as [String : Any]
         
         let fileDic = ["jsonfile" : jsonFile]
         // Here you can pass multiple image in array i am passing just one
         let fileArray = NSMutableArray(array: [fileDic as NSDictionary])
             
-        self.showLoadingView()
-        APIs().uploadJsonFile(withUrl: SERVER_URL + "upRoute", withParam: params, withFiles: fileArray) { (isSuccess, response) in
+//        self.showLoadingView()
+        APIs().uploadJsonFile(withUrl: SERVER_URL + "updatereportdatainrealtime", withParam: params, withFiles: fileArray) { (isSuccess, response) in
             // Your Will Get Response here
-            self.dismissLoadingView()
-            print("Response: \(response)")
+//            self.dismissLoadingView()
+            print("REAL TIME RESP: \(response)")
             if isSuccess == true{
                 let result_code = response["result_code"] as Any
                 if result_code as! String == "0"{
                     print("Offline loading: \(response)")
                     self.traces1.removeAll()
                     self.cnt = 0
+                    self.isFirstRoute = false
                 }
             }else{
-                let message = "File size: " + String(response.fileSize()) + "\n" + "Description: " + response.description
-                self.showToast(msg: "Issue: \n" + message)
+//                let message = "File size: " + String(response.fileSize()) + "\n" + "Description: " + response.description
+//                self.showToast(msg: "Issue: \n" + message)
+                print("Error!")
             }
         }
         
@@ -983,13 +1046,18 @@ class HomeViewController: BaseViewController, CLLocationManagerDelegate, GMSMapV
     func createPointsJsonStr() -> String {
         var jsonStr = ""
         var jsonArray = [Any]()
+        var i = 0
         for rpoint in traces1 {
+            i += 1
             let jsonObject: [String: String] = [
+                "id": String(i),
+                "route_id": String(routeID),
                 "lat": String(rpoint.lat),
                 "lng": String(rpoint.lng),
                 "comment": rpoint.comment,
                 "time": String(rpoint.time),
                 "color": rpoint.color,
+                "status": "",
             ]
             jsonArray.append(jsonObject)
         }
@@ -1002,6 +1070,63 @@ class HomeViewController: BaseViewController, CLLocationManagerDelegate, GMSMapV
         return jsonStr
     }
     
+    func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
+        completionHandler()
+    }
+
+    func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
+        completionHandler([.alert, .badge, .sound])
+    }
+    
+    func requestNotificationAuthorization() {
+        let authOptions = UNAuthorizationOptions.init(arrayLiteral: .alert, .badge, .sound)
+        self.userNotificationCenter.requestAuthorization(options: authOptions) { (success, error) in
+            if let error = error {
+                print("Error: ", error)
+            }
+        }
+    }
+    
+    let notification_identifier = "GEO Timetracker Notification"
+
+    func sendNotification(title:String, body:String) {
+        let notificationContent = UNMutableNotificationContent()
+        notificationContent.title = title
+        notificationContent.body = body
+        notificationContent.badge = NSNumber(value: 0)
+        
+        if let url = Bundle.main.url(forResource: "icon",
+                                    withExtension: "png") {
+            if let attachment = try? UNNotificationAttachment(identifier: notification_identifier,
+                                                            url: url,
+                                                            options: nil) {
+                notificationContent.attachments = [attachment]
+            }
+        }
+        let request = UNNotificationRequest(identifier: notification_identifier,
+                                            content: notificationContent,
+                                            trigger: nil)
+        
+        userNotificationCenter.add(request) { (error) in
+            if let error = error {
+                print("Notification Error: ", error)
+            }
+        }
+    }
+    
+    func removeNotification(){
+        userNotificationCenter.removePendingNotificationRequests(withIdentifiers: [notification_identifier])
+        userNotificationCenter.removeDeliveredNotifications(withIdentifiers: [notification_identifier])
+    }
+    
+    func mapView(_ mapView: GMSMapView, markerInfoWindow marker: GMSMarker) -> UIView? {
+        let infoView:MarkerView = (Bundle.main.loadNibNamed("MarkerView", owner: self, options: nil)!.first as? MarkerView)!
+        let frame = CGRect(x: 10, y: 10, width: 200, height: infoView.frame.height)
+        infoView.frame = frame
+        infoView.titleBox.text = marker.title
+        infoView.timeBox.text = marker.snippet
+        return infoView
+    }
     
 }
 

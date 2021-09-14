@@ -112,6 +112,10 @@ class LoginViewController: BaseViewController {
                 // already logged in with another device
                 thisUser.idx = 0
                 self.showToast(msg: "すでに別の電話からログインしています。 別の電話で同時にログインすることはできません。")
+            }else if result_code == "100" {
+                // already logged in with another device
+                thisUser.idx = 0
+                self.showToast(msg: "あなたの管理者の支払いは困っています。 それが解決されるまでログインすることはできません。")
             }else{
                 thisUser.idx = 0
                 self.showToast(msg: "何かが間違っている。")
