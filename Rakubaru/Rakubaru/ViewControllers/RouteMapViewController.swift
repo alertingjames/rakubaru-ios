@@ -56,7 +56,9 @@ class RouteMapViewController: BaseViewController, CLLocationManagerDelegate, GMS
             // manager.startUpdatingHeading()
         }
         
-        showLoadingDialog()
+        if gPoints.count > 100 {
+            showLoadingDialog()
+        }
         
         if gRoute.assign_id > 0 {
             getRouteArea(route_id: gRoute.idx)

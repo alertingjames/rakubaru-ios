@@ -29,7 +29,7 @@
 	<string>写真を撮るためのアクセスを許可してください。 写真を撮って、登録したいプロフィール情報を完成させることができます。</string>
 	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
 	<string>あなたの作品を追跡するためにあなたの場所を取得することを許可してください。</string>
-	<key>NSLocationUsageDescription</key>
+	<key>NSLocationAlwaysUsageDescription</key>
 	<string>あなたの作品を追跡するためにあなたの場所を取得することを許可してください。</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>あなたの作品を追跡するためにあなたの場所を取得することを許可してください。</string>

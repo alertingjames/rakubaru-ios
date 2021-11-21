@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		046804A6307B8167DF843DBD /* Pods_Rakubaru_RakubaruUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C73E4921214D8C8A0F6EEA1F /* Pods_Rakubaru_RakubaruUITests.framework */; };
+		1AA313662743C59C00120B0C /* RouteNameInputBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1AA313652743C59C00120B0C /* RouteNameInputBox.swift */; };
 		42C9BB23301A277F403DAC1A /* Pods_RakubaruTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DC96713892629D1BCDD0BCAD /* Pods_RakubaruTests.framework */; };
 		6535C1A825708E7000CA6BF1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6535C1A725708E7000CA6BF1 /* AppDelegate.swift */; };
 		6535C1AA25708E7000CA6BF1 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6535C1A925708E7000CA6BF1 /* SceneDelegate.swift */; };
@@ -72,6 +73,7 @@
 /* Begin PBXFileReference section */
 		02F0EB44523AE928C0D1C1DB /* Pods-RakubaruTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RakubaruTests.release.xcconfig"; path = "Target Support Files/Pods-RakubaruTests/Pods-RakubaruTests.release.xcconfig"; sourceTree = "<group>"; };
 		18E0F2C66345257AFE96D7B8 /* Pods-Rakubaru-RakubaruUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Rakubaru-RakubaruUITests.debug.xcconfig"; path = "Target Support Files/Pods-Rakubaru-RakubaruUITests/Pods-Rakubaru-RakubaruUITests.debug.xcconfig"; sourceTree = "<group>"; };
+		1AA313652743C59C00120B0C /* RouteNameInputBox.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RouteNameInputBox.swift; sourceTree = "<group>"; };
 		6535C1A425708E7000CA6BF1 /* Rakubaru.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Rakubaru.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6535C1A725708E7000CA6BF1 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		6535C1A925708E7000CA6BF1 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -307,6 +309,7 @@
 				6535C2AE2572EA2A00CA6BF1 /* LoadingDialog.swift */,
 				659BDC4B2574F01B007F1601 /* HintBox.swift */,
 				657779162583E0220000C6AC /* HelpBox.swift */,
+				1AA313652743C59C00120B0C /* RouteNameInputBox.swift */,
 			);
 			path = Frames;
 			sourceTree = "<group>";
@@ -631,6 +634,7 @@
 				6535C24E25709A9800CA6BF1 /* Point.swift in Sources */,
 				6535C1B225708E7000CA6BF1 /* Rakubaru.xcdatamodeld in Sources */,
 				BE32EC452603DCF100A0835C /* Subloc.swift in Sources */,
+				1AA313662743C59C00120B0C /* RouteNameInputBox.swift in Sources */,
 				BE32EC362603CF3C00A0835C /* AreasViewController.swift in Sources */,
 				6535C1AA25708E7000CA6BF1 /* SceneDelegate.swift in Sources */,
 				BE0460EC262DCB4B0027936C /* Reachability.swift in Sources */,
@@ -814,14 +818,14 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 7;
+				CURRENT_PROJECT_VERSION = 9;
 				DEVELOPMENT_TEAM = 8M42V3ZFZR;
 				INFOPLIST_FILE = Rakubaru/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.6;
+				MARKETING_VERSION = 1.8;
 				PRODUCT_BUNDLE_IDENTIFIER = com.app.rakubaru;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
@@ -836,14 +840,14 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 7;
+				CURRENT_PROJECT_VERSION = 9;
 				DEVELOPMENT_TEAM = 8M42V3ZFZR;
 				INFOPLIST_FILE = Rakubaru/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.6;
+				MARKETING_VERSION = 1.8;
 				PRODUCT_BUNDLE_IDENTIFIER = com.app.rakubaru;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;

@@ -783,14 +783,9 @@ class APIs {
         }
     }
     
-    static func uploadRealTimeRoute(route_id:Int64, assign_id:Int64, member_id: Int64, name:String, description:String, start_time:String, end_time:String, duration:Int64, speed:Double, distance:Double, status:String, pulse:Bool, handleCallback: @escaping (String, String) -> ())
+    static func uploadStartOrEndRoute(route_id:Int64, assign_id:Int64, member_id: Int64, name:String, description:String, start_time:String, end_time:String, duration:Int64, speed:Double, distance:Double, status:String, lat:String, lng:String, comment:String, color:String, tm:String, handleCallback: @escaping (String, String) -> ())
     {
         //NSLog(url)
-        
-        var pulseVal = "0"
-        if pulse {
-            pulseVal = "1"
-        }
         
         let params = [
             "route_id":String(route_id),
@@ -804,10 +799,14 @@ class APIs {
             "speed": String(speed),
             "distance": String(distance),
             "status": status,
-            "pulse":pulseVal
+            "lat":lat,
+            "lng":lng,
+            "comment":comment,
+            "color":color,
+            "tm":tm
         ] as [String : Any]
         
-        Alamofire.request(SERVER_URL + "startorendreporting", method: .post, parameters: params).responseJSON { response in
+        Alamofire.request(SERVER_URL + "rakuSOEreporting", method: .post, parameters: params).responseJSON { response in
             
             if response.result.isFailure{
                 handleCallback("", "Server issue")

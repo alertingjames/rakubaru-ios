@@ -43,8 +43,10 @@ class HomeViewController: BaseViewController, CLLocationManagerDelegate, GMSMapV
     var polylines = [GMSPolyline]()
     var traces = [Point]()
     var traces1 = [Point]()
+    var traces0 = [Point]()
     var markers = [GMSMarker]()
     
+    var routeNameInputBox:RouteNameInputBox!
     var routeSaveBox:RouteSaveBox!
     var questionDialog:QuestionDialog!
     var loadingDialog:LoadingDialog!
@@ -89,6 +91,7 @@ class HomeViewController: BaseViewController, CLLocationManagerDelegate, GMSMapV
         gAutoReport = true
         UserDefaults.standard.setValue(true, forKey: "auto_report")
         
+        routeNameInputBox = (self.storyboard!.instantiateViewController(withIdentifier: "RouteNameInputBox") as! RouteNameInputBox)
         routeSaveBox = (self.storyboard!.instantiateViewController(withIdentifier: "RouteSaveBox") as! RouteSaveBox)
         questionDialog = (self.storyboard!.instantiateViewController(withIdentifier: "QuestionDialog") as! QuestionDialog)
         loadingDialog = (self.storyboard!.instantiateViewController(withIdentifier: "LoadingDialog") as! LoadingDialog)
@@ -107,16 +110,18 @@ class HomeViewController: BaseViewController, CLLocationManagerDelegate, GMSMapV
 
         // User Location
         manager.delegate = self
+        
         manager.requestAlwaysAuthorization()
         manager.startUpdatingLocation()
         manager.startMonitoringSignificantLocationChanges()
         manager.allowsBackgroundLocationUpdates = true
-        manager.desiredAccuracy = kCLLocationAccuracyBest
+        manager.pausesLocationUpdatesAutomatically = false
+        manager.desiredAccuracy = kCLLocationAccuracyBestForNavigation
         // locationManager.allowDeferredLocationUpdates(untilTraveled: 0, timeout: 0)
         if CLLocationManager.locationServicesEnabled() {
-            disableLocationManager()
-            // manager.startUpdatingLocation()
-            // manager.startUpdatingHeading()
+//             manager.startUpdatingLocation()
+//             manager.startUpdatingHeading()
+            self.disableLocationManager()
         }
         
         isLocationRecording = false
@@ -149,7 +154,7 @@ class HomeViewController: BaseViewController, CLLocationManagerDelegate, GMSMapV
             if path.availableInterfaces.count < 2 {
                 print("Flight mode")
                 if Reachability.isConnectedToNetwork() {
-                    self.sendNotification(title: "警告", body: "ネットワークがアクティブです。 アプリを機内モードにしないでください。")
+//                    self.sendNotification(title: "警告", body: "ネットワークがアクティブです。 アプリを機内モードにしないでください。")
                 }
             }
             print(path.availableInterfaces)
@@ -157,12 +162,18 @@ class HomeViewController: BaseViewController, CLLocationManagerDelegate, GMSMapV
         let queue = DispatchQueue.global(qos: .background)
         monitor.start(queue: queue)
         
+        UserDefaults.standard.set(0, forKey: "last_loaded")
+        
     }
     
     @objc func appToBackground(notification: NSNotification) {
         print("Moved to background")
         checkDevice(member_id: thisUser.idx, device: getDeviceID())
         endCheckLoading()
+        
+        if traces1.count > 0 {
+            
+        }
     }
     
     @objc func appToForeground(notification: NSNotification) {
@@ -182,8 +193,6 @@ class HomeViewController: BaseViewController, CLLocationManagerDelegate, GMSMapV
                 speed = totalDistance * 3600 / 1
             }
             speedBox.text = String(format: "%.2f", speed) + "km/h"
-            
-            self.isFirstRoute = false
         }
         
         checkDevice(member_id: thisUser.idx, device: getDeviceID())
@@ -203,6 +212,19 @@ class HomeViewController: BaseViewController, CLLocationManagerDelegate, GMSMapV
         }
         polylines.removeAll()
         traces.removeAll()
+        traces1.removeAll()
+    }
+    
+    func locationManagerDidChangeAuthorization(_ manager: CLLocationManager) {
+        switch manager.accuracyAuthorization {
+        case .fullAccuracy:
+            print("Full accuracy")
+            break
+        case .reducedAccuracy:
+            print("Reduced accuracy")
+        default:
+            break
+        }
     }
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
@@ -211,7 +233,7 @@ class HomeViewController: BaseViewController, CLLocationManagerDelegate, GMSMapV
             print("My Location = \(userLocation)")
             let center = CLLocationCoordinate2D(latitude: (userLocation.coordinate.latitude), longitude: (userLocation.coordinate.longitude))
             
-            if thisUserLocation == nil{
+            if thisUserLocation == nil {
                 camera = GMSCameraPosition.camera(withLatitude: (userLocation.coordinate.latitude), longitude: (userLocation.coordinate.longitude), zoom: 16.0, bearing: 0, viewingAngle: 0)
                 map = GMSMapView.map(withFrame: self.mapView.frame, camera: camera!)
                 map.animate(to: camera!)
@@ -231,6 +253,7 @@ class HomeViewController: BaseViewController, CLLocationManagerDelegate, GMSMapV
                     isMyLocation = true
                 }
             }
+            
             thisUserLocation = center
             if thisUserLocation != nil && isLocationRecording {
                 drawRoute(loc: thisUserLocation!)
@@ -284,16 +307,19 @@ class HomeViewController: BaseViewController, CLLocationManagerDelegate, GMSMapV
     var lastDistance:Double = 0
     var cnt:Int = 0
     
+    var xxx:Bool = false
+    
     func drawRoute(loc:CLLocationCoordinate2D) {
         if isLocationRecording {
             let currentTime = Date().currentTimeMillis()
             
             if traces.count == 0 {
                 let point = Point()
-                point.lat = thisUserLocation!.latitude
-                point.lng = thisUserLocation!.longitude
+                point.lat = loc.latitude
+                point.lng = loc.longitude
                 point.time = String(currentTime)
                 traces.append(point)
+                traces1.append(point)
                 return
             }
             
@@ -308,8 +334,8 @@ class HomeViewController: BaseViewController, CLLocationManagerDelegate, GMSMapV
             if traces.count >= 2 {
                 let lastRpoint0 = traces[traces.count - 2]
                 let dist0 = getDistance(from: CLLocationCoordinate2D(latitude: lastRpoint0.lat, longitude: lastRpoint0.lng), to: CLLocationCoordinate2D(latitude: lastRpoint!.lat, longitude: lastRpoint!.lng))
-                let dist1 = getDistance(from: CLLocationCoordinate2D(latitude: lastRpoint!.lat, longitude: lastRpoint!.lng), to: CLLocationCoordinate2D(latitude: thisUserLocation!.latitude, longitude: thisUserLocation!.longitude))
-                let dist2 = getDistance(from: CLLocationCoordinate2D(latitude: lastRpoint0.lat, longitude: lastRpoint0.lng), to: CLLocationCoordinate2D(latitude: thisUserLocation!.latitude, longitude: thisUserLocation!.longitude))
+                let dist1 = getDistance(from: CLLocationCoordinate2D(latitude: lastRpoint!.lat, longitude: lastRpoint!.lng), to: CLLocationCoordinate2D(latitude: loc.latitude, longitude: loc.longitude))
+                let dist2 = getDistance(from: CLLocationCoordinate2D(latitude: lastRpoint0.lat, longitude: lastRpoint0.lng), to: CLLocationCoordinate2D(latitude: loc.latitude, longitude: loc.longitude))
                 if dist2 < dist0 || dist2 < dist1 {
                     pulse = true
                     traces.remove(at: traces.firstIndex(where: {$0.idx == lastRpoint!.idx})!)
@@ -318,24 +344,24 @@ class HomeViewController: BaseViewController, CLLocationManagerDelegate, GMSMapV
                     totalDistance = totalDistance - lastDistance * 0.001
                     
                     path.addLatitude(lastRpoint0.lat, longitude: lastRpoint0.lng)
-                    path.addLatitude(thisUserLocation!.latitude, longitude: thisUserLocation!.longitude)
+                    path.addLatitude(loc.latitude, longitude: loc.longitude)
                     
                     point1 = CLLocationCoordinate2D(latitude: lastRpoint0.lat, longitude: lastRpoint0.lng)
-                    point2 = CLLocationCoordinate2D(latitude: thisUserLocation!.latitude, longitude: thisUserLocation!.longitude)
+                    point2 = CLLocationCoordinate2D(latitude: loc.latitude, longitude: loc.longitude)
                     
                 }else {
                     path.addLatitude(lastRpoint!.lat, longitude: lastRpoint!.lng)
-                    path.addLatitude(thisUserLocation!.latitude, longitude: thisUserLocation!.longitude)
+                    path.addLatitude(loc.latitude, longitude: loc.longitude)
                     
                     point1 = CLLocationCoordinate2D(latitude: lastRpoint!.lat, longitude: lastRpoint!.lng)
-                    point2 = CLLocationCoordinate2D(latitude: thisUserLocation!.latitude, longitude: thisUserLocation!.longitude)
+                    point2 = CLLocationCoordinate2D(latitude: loc.latitude, longitude: loc.longitude)
                 }
             }else {
                 path.addLatitude(lastRpoint!.lat, longitude: lastRpoint!.lng)
-                path.addLatitude(thisUserLocation!.latitude, longitude: thisUserLocation!.longitude)
+                path.addLatitude(loc.latitude, longitude: loc.longitude)
                 
                 point1 = CLLocationCoordinate2D(latitude: lastRpoint!.lat, longitude: lastRpoint!.lng)
-                point2 = CLLocationCoordinate2D(latitude: thisUserLocation!.latitude, longitude: thisUserLocation!.longitude)
+                point2 = CLLocationCoordinate2D(latitude: loc.latitude, longitude: loc.longitude)
             }
             
             let polyline = GMSPolyline(path: path)
@@ -358,7 +384,8 @@ class HomeViewController: BaseViewController, CLLocationManagerDelegate, GMSMapV
             totalDistance = totalDistance + lastDistance * 0.001
             distanceBox.text = String(format: "%.2f", totalDistance) + "km"
             duration = currentTime - startedTime
-            durationBox.text = getDurationFromMilliseconds0(ms: duration)
+            let (h,m,s) = secondsToHoursMinutesSeconds(seconds: Int(duration/1000))
+            durationBox.text = convert(number: h) + ":" + convert(number: m) + ":" + convert(number: s)
             speedBox.text = String(format: "%.2f", mSpeed) + "km/h"
             
             var tSecs = currentTime - Int64(startedTime)
@@ -366,45 +393,50 @@ class HomeViewController: BaseViewController, CLLocationManagerDelegate, GMSMapV
             speed = totalDistance * 3600 / ( Double(tSecs) * 0.001 )
             
             let point = Point()
-            point.lat = thisUserLocation!.latitude
-            point.lng = thisUserLocation!.longitude
+            point.lat = loc.latitude
+            point.lng = loc.longitude
             point.time = String(currentTime)
             point.color = getColorFromSpeed(speed: mSpeed).htmlRGBColor
-            traces.append(point)
-            traces1.append(point)
             
-//            if !Reachability.isConnectedToNetwork() {
-//                traces1.append(point)
-//                print("Offline traces: \(traces1.count)")
-//            }
+            if traces.count > 1 {
+                traces1.append(traces[traces.count - 2])
+            }
             
             if traces.count == 2 {
                 traces[0].color = point.color
             }
             
+            traces.append(point)
+            traces1.append(point)
+            
             endedTime = Date().currentTimeMillis()
             let color = getColorFromSpeed(speed: mSpeed).htmlRGBColor
             
-            if Reachability.isConnectedToNetwork() {
-                if self.isFirstRoute {
-                    upRoute()
-                    UserDefaults.standard.setValue(currentTime, forKey: "last_loaded")
-                }else {
-                    if traces1.count > 30 {
-                        cnt += 1
-                        if cnt > 5 {
-                            if Int(currentTime) - UserDefaults.standard.integer(forKey: "last_loaded") > 10000 {
-                                upRoute()
-                                UserDefaults.standard.setValue(currentTime, forKey: "last_loaded")
-                            }
-                        }else {
-                            traces1.append(point)
-                        }
+            if h >= 8 && m >= 15 {
+                self.finalizeReport(is8hours: true)
+                return
+            }
+            
+            if self.xxx {
+                self.traces0.append(point)
+                return
+            }
+            
+            let last_loaded = UserDefaults.standard.object(forKey: "last_loaded") as! Int64
+            let diff = currentTime - last_loaded
+            if diff > 600000 {
+                if Reachability.isConnectedToNetwork() {
+                    self.xxx = true
+                    self.uploadRoutePoints(end: false)
+                } else {
+                    self.xxx = false
+                    if self.traces0.count > 0 {
+                        self.traces0.removeAll()
                     }
                 }
             }
             
-            print("Recording traces: \(traces.count)")
+            print("Total recording traces: \(traces.count)")
         }
     }
     
@@ -427,6 +459,11 @@ class HomeViewController: BaseViewController, CLLocationManagerDelegate, GMSMapV
         let distanceInMeters = fromLoc.distance(from: toLoc)
         return distanceInMeters
     }
+    
+    func secondsToHoursMinutesSeconds (seconds : Int) -> (Int, Int, Int) {
+        return (seconds / 3600, (seconds % 3600) / 60, (seconds % 3600) % 60)
+    }
+    
     
     @IBAction func openMenu(_ sender: Any) {
         if isLoading { return }
@@ -488,55 +525,54 @@ class HomeViewController: BaseViewController, CLLocationManagerDelegate, GMSMapV
     
     @IBAction func toggleRecording(_ sender: Any) {
         if isLoading { return }
+        print("islocationrecording??????????? \(isLocationRecording)")
         if isLocationRecording {
-            startBtn.backgroundColor = primaryDarkColor
-            startBtn.layer.cornerRadius = startBtn.frame.height / 2
-            startBtn.setTitleColor(.white, for: .normal)
-            startBtn.setTitle("開始", for: .normal)
-            isLocationRecording = false
-            disableLocationManager()
-            
-            routeSaveBox = (self.storyboard!.instantiateViewController(withIdentifier: "RouteSaveBox") as! RouteSaveBox)
-            routeSaveBox.view.frame = CGRect(x: 0, y: 0, width: self.screenWidth, height: self.screenHeight)
-            routeSaveBox.titleBox.text = "ルートに説明を追加します。"
-            routeSaveBox.end = 2
-            routeSaveBox.nameBox.visibility = .gone
-            routeSaveBox.descBox.text = ""
-            routeSaveBox.checkBox.visibilityh = .gone
-            routeSaveBox.checkBoxLabel.visibilityh = .gone
-            if gAutoReport {
-                routeSaveBox.checkBox.isChecked = true
-            }else {
-                routeSaveBox.checkBox.isChecked = false
-            }
-            self.addChild(self.routeSaveBox)
-            self.view.addSubview(self.routeSaveBox.view)
-            
-            if traces1.count > 0 {
-                upRoute()
-            }
-            
+            finalizeReport(is8hours: false)
         }else {
-            routeSaveBox = (self.storyboard!.instantiateViewController(withIdentifier: "RouteSaveBox") as! RouteSaveBox)
-            routeSaveBox.view.frame = CGRect(x: 0, y: 0, width: self.screenWidth, height: self.screenHeight)
-            routeSaveBox.titleBox.text = "ルートに名前を付けます。"
-            routeSaveBox.end = 0
-            routeSaveBox.nameBox.text = thisUser.name + "_" + getRouteNameTimeFromTimeStamp(timeStamp: Double(Date().currentTimeMillis()/1000))
-            routeSaveBox.descBox.text = ""
-            routeSaveBox.descBox.visibility = .gone
-            routeSaveBox.checkBox.visibilityh = .gone
-            routeSaveBox.checkBoxLabel.visibilityh = .gone
-            if gAutoReport {
-                routeSaveBox.checkBox.isChecked = true
-            }else {
-                routeSaveBox.checkBox.isChecked = false
-            }
-            self.addChild(self.routeSaveBox)
-            self.view.addSubview(self.routeSaveBox.view)
+            routeNameInputBox = (self.storyboard!.instantiateViewController(withIdentifier: "RouteNameInputBox") as! RouteNameInputBox)
+            routeNameInputBox.view.frame = CGRect(x: 0, y: 0, width: self.screenWidth, height: self.screenHeight)
+            routeNameInputBox.nameBox.text = thisUser.name + "_" + getRouteNameTimeFromTimeStamp(timeStamp: Double(Date().currentTimeMillis()/1000))
+            self.addChild(routeNameInputBox)
+            self.view.addSubview(routeNameInputBox.view)
         }
         
         checkDevice(member_id: thisUser.idx, device: getDeviceID())
         
+    }
+    
+    
+    var IS8HOURS:Bool = false
+    
+    func finalizeReport(is8hours:Bool) {
+        startBtn.backgroundColor = primaryDarkColor
+        startBtn.layer.cornerRadius = startBtn.frame.height / 2
+        startBtn.setTitleColor(.white, for: .normal)
+        startBtn.setTitle("開始", for: .normal)
+        isLocationRecording = false
+        disableLocationManager()
+        
+        IS8HOURS = is8hours
+        
+        if !is8hours {
+            routeSaveBox = (self.storyboard!.instantiateViewController(withIdentifier: "RouteSaveBox") as! RouteSaveBox)
+            routeSaveBox.view.frame = CGRect(x: 0, y: 0, width: self.screenWidth, height: self.screenHeight)
+            self.addChild(self.routeSaveBox)
+            self.view.addSubview(self.routeSaveBox.view)
+        }else {
+            self.sendNotification(title: "らくポス", body: "ログが8時間を超えましたので、自動的に停止されます。")
+        }
+        
+        if Reachability.isConnectedToNetwork() {
+            if traces1.count > 0 {
+                uploadRoutePoints(end: true)
+            }else {
+                if is8hours {
+                    let color:String = getColorFromSpeed(speed: mSpeed).htmlRGBColor
+                    self.endedTime = Date().currentTimeMillis()
+                    self.uploadStartOrEndRoute(route_id: self.routeID, assign_id: self.assignID, member_id: thisUser.idx, name: "", description: "", start_time: String(self.startedTime), end_time: String(self.endedTime), duration: self.duration, speed: self.speed, distance: self.totalDistance, status: "2", lat:String(thisUserLocation!.latitude), lng:String(thisUserLocation!.longitude), comment: "", color: color, tm: String(self.endedTime))
+                }
+            }
+        }
     }
     
     func startLocationRecording(name:String) {
@@ -555,7 +591,13 @@ class HomeViewController: BaseViewController, CLLocationManagerDelegate, GMSMapV
         endedTime = Date().currentTimeMillis()
         let color = getColorFromSpeed(speed: mSpeed).htmlRGBColor
         
-        self.uploadRealTimeRoute(route_id: self.routeID, assign_id: self.assignID, member_id: thisUser.idx, name: name, description: "", start_time: String(self.startedTime), end_time: String(self.endedTime), duration: self.duration, speed: self.speed, distance: self.totalDistance, status: "report", end: 0, pulse: false)
+        traces.removeAll()
+        traces1.removeAll()
+        traces0.removeAll()
+        
+        IS8HOURS = false
+        
+        self.uploadStartOrEndRoute(route_id: self.routeID, assign_id: self.assignID, member_id: thisUser.idx, name: name, description: "", start_time: String(self.startedTime), end_time: String(self.endedTime), duration: self.duration, speed: self.speed, distance: self.totalDistance, status: "0", lat:String(thisUserLocation!.latitude), lng:String(thisUserLocation!.longitude), comment: "", color: color, tm: String(startedTime))
     }
     
     func enableLocationManager() {
@@ -571,7 +613,7 @@ class HomeViewController: BaseViewController, CLLocationManagerDelegate, GMSMapV
     func endRoute(desc:String) {
         let color:String = getColorFromSpeed(speed: mSpeed).htmlRGBColor
         self.endedTime = Date().currentTimeMillis()
-        self.uploadRealTimeRoute(route_id: self.routeID, assign_id: self.assignID, member_id: thisUser.idx, name: "", description: desc, start_time: String(self.startedTime), end_time: String(self.endedTime), duration: self.duration, speed: self.speed, distance: self.totalDistance, status: "report", end: 2, pulse: false)
+        self.uploadStartOrEndRoute(route_id: self.routeID, assign_id: self.assignID, member_id: thisUser.idx, name: "", description: desc, start_time: String(self.startedTime), end_time: String(self.endedTime), duration: self.duration, speed: self.speed, distance: self.totalDistance, status: "2", lat:String(thisUserLocation!.latitude), lng:String(thisUserLocation!.longitude), comment: "", color: color, tm: String(self.endedTime))
     }
     
     
@@ -934,16 +976,16 @@ class HomeViewController: BaseViewController, CLLocationManagerDelegate, GMSMapV
         gArea = Area()
     }
     
-    func uploadRealTimeRoute(route_id:Int64, assign_id:Int64, member_id: Int64, name:String, description:String, start_time:String, end_time:String, duration:Int64, speed:Double, distance:Double, status:String, end:Int, pulse:Bool) {
-        if end == 0 || end == 2 { self.showLoadingView()}
-        APIs.uploadRealTimeRoute(route_id: route_id, assign_id: assign_id, member_id: member_id, name: name, description: description, start_time: start_time, end_time: end_time, duration: duration, speed: speed, distance: distance, status: status, pulse: pulse, handleCallback: { [self]
+    func uploadStartOrEndRoute(route_id:Int64, assign_id:Int64, member_id: Int64, name:String, description:String, start_time:String, end_time:String, duration:Int64, speed:Double, distance:Double, status:String, lat:String, lng:String, comment:String, color:String, tm:String) {
+        if Int(status) == 0 || Int(status) == 2 { self.showLoadingView()}
+        APIs.uploadStartOrEndRoute(route_id:route_id, assign_id:assign_id, member_id: member_id, name:name, description:description, start_time:start_time, end_time:end_time, duration:duration, speed:speed, distance:distance, status:status, lat:lat, lng:lng, comment:comment, color:color, tm:tm, handleCallback: { [self]
             route_id, result_code in
-            if end == 0 || end == 2 { self.dismissLoadingView() }
+            if Int(status) == 0 || Int(status) == 2 { self.dismissLoadingView() }
             
             print(result_code)
             if result_code == "0"{
                 routeID = Int64(route_id)!
-                if end == 0 {
+                if Int(status) == 0 {
                     clearPolylines()
                     
                     startBtn.backgroundColor = .red
@@ -958,32 +1000,13 @@ class HomeViewController: BaseViewController, CLLocationManagerDelegate, GMSMapV
                     isLoading = false
                     
                     distanceBox.text = String(format: "%.2f", 0) + "km"
-                    durationBox.text = getDurationFromMilliseconds0(ms: 0)
+                    durationBox.text = "00:00:00"
                     speedBox.text = String(format: "%.2f", 0) + "km/h"
-                    
-                    print("FFFFFFIRST=== \(true)")
-                    
-                    self.isFirstRoute = true
-                    self.drawRoute(loc: self.thisUserLocation!)
 
                 }else {
-                    if end == 2 {
-    //                    isLoading = false
-    //                    savingPoints = 0
-                        
-//                        startBtn.backgroundColor = primaryDarkColor
-//                        startBtn.layer.cornerRadius = startBtn.frame.height / 2
-//                        startBtn.setTitleColor(.white, for: .normal)
-//                        startBtn.setTitle("開始", for: .normal)
-//                        isLocationRecording = false
-//                        disableLocationManager()
-                        
-                        if status != "" {
-                            showToast2(msg: "正常に送信されました！")
-                        }else {
-                            showToast2(msg: "保存された")
-                        }
-                        
+                    if Int(status) == 2 {
+                        print("STATUS/////////222222222222")
+                        showToast2(msg: "正常に送信されました！")
                         let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(identifier: "MyRoutesViewController")
                         gRoutesOption = "reports"
                         self.transitionVc(vc: vc, duration: 0.3, type: .fromRight)
@@ -997,10 +1020,10 @@ class HomeViewController: BaseViewController, CLLocationManagerDelegate, GMSMapV
         })
     }
     
-    func upRoute() {
-        
+    func uploadRoutePoints(end:Bool) {
+
         let jsonFile = createPointsJsonStr().data(using: .utf8)!
-        
+
         let params = [
             "route_id":String(routeID),
             "assign_id":String(self.assignID),
@@ -1012,36 +1035,52 @@ class HomeViewController: BaseViewController, CLLocationManagerDelegate, GMSMapV
             "duration": String(self.duration),
             "speed": String(self.speed),
             "distance": String(self.totalDistance),
-            "status": "report",
-            "pulse":"0"
+            "status": end ? "1" : "0",
         ] as [String : Any]
-        
+
         let fileDic = ["jsonfile" : jsonFile]
         // Here you can pass multiple image in array i am passing just one
         let fileArray = NSMutableArray(array: [fileDic as NSDictionary])
-            
+
 //        self.showLoadingView()
-        APIs().uploadJsonFile(withUrl: SERVER_URL + "updatereportdatainrealtime", withParam: params, withFiles: fileArray) { (isSuccess, response) in
+        APIs().uploadJsonFile(withUrl: SERVER_URL + "rakuETMupdate", withParam: params, withFiles: fileArray) { (isSuccess, response) in
             // Your Will Get Response here
 //            self.dismissLoadingView()
-            print("REAL TIME RESP: \(response)")
+            print("XXXXXXXXXX JSON: \(response)")
+            self.xxx = false
             if isSuccess == true{
                 let result_code = response["result_code"] as Any
                 if result_code as! String == "0"{
-                    print("Offline loading: \(response)")
                     self.traces1.removeAll()
-                    self.cnt = 0
-                    self.isFirstRoute = false
+                    let curtime:Int64 = Date().currentTimeMillis()
+                    UserDefaults.standard.set(curtime, forKey: "last_loaded")
+                    if !end {
+                        if self.traces0.count > 0 {
+                            for tr in self.traces0 {
+                                self.traces1.append(tr)
+                            }
+                        }
+                    }else if self.IS8HOURS {
+                        print("STATUS/////////111111111111")
+                        self.traces.removeAll()
+                        let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(identifier: "MyRoutesViewController")
+                        gRoutesOption = "reports"
+                        self.transitionVc(vc: vc, duration: 0.3, type: .fromRight)
+                    }
                 }
+                self.traces0.removeAll()
             }else{
 //                let message = "File size: " + String(response.fileSize()) + "\n" + "Description: " + response.description
 //                self.showToast(msg: "Issue: \n" + message)
                 print("Error!")
+                self.xxx = false
+                self.traces0.removeAll()
             }
         }
-        
-        
+
+
     }
+    
     
     func createPointsJsonStr() -> String {
         var jsonStr = ""

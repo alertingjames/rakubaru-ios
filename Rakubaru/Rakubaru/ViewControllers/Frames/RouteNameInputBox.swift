@@ -1,22 +1,20 @@
 //
-//  RouteSaveBox.swift
+//  RouteNameInputBox.swift
 //  Rakubaru
 //
-//  Created by Andre on 11/28/20.
+//  Created by james on 11/16/21.
 //
 
 import UIKit
-import SimpleCheckbox
 
-class RouteSaveBox: BaseViewController {
+class RouteNameInputBox: BaseViewController {
     
     @IBOutlet weak var titleBox: UILabel!
-    @IBOutlet weak var descBox: UITextView!
+    @IBOutlet weak var nameBox: UITextField!
     @IBOutlet weak var okayButton: UIButton!
     @IBOutlet weak var alertView: UIView!
     @IBOutlet weak var headerView: UIView!
-    @IBOutlet weak var descH: NSLayoutConstraint!
-    
+
     var end:Int = 0
     
     override func viewDidLoad() {
@@ -25,13 +23,9 @@ class RouteSaveBox: BaseViewController {
         alertView.layer.cornerRadius = 8
         headerView.roundCorners(corners: [.topLeft, .topRight], radius: 8.0)
         
-        descBox.layer.cornerRadius = 5
-        descBox.layer.borderColor = primaryDarkColor.cgColor
-        descBox.layer.borderWidth = 1.5
-        
-        descBox.setPlaceholder(string: "メモ（オプション）")
-        descBox.textContainerInset = UIEdgeInsets(top: 8, left: 4, bottom: 8, right: 4)
-        descBox.delegate = self
+        nameBox.layer.cornerRadius = 5
+        nameBox.layer.borderColor = primaryDarkColor.cgColor
+        nameBox.layer.borderWidth = 1.5
         
         let blurFx = UIBlurEffect(style: UIBlurEffect.Style.dark)
         let blurFxView = UIVisualEffectView(effect: blurFx)
@@ -50,6 +44,8 @@ class RouteSaveBox: BaseViewController {
         
         okayButton.layer.cornerRadius = 3
         
+        nameBox.text = thisUser.name + "_" + getRouteNameTimeFromTimeStamp(timeStamp: Double(Date().currentTimeMillis()/1000))
+        
         let tap = UITapGestureRecognizer(target: self, action: #selector(self.tappedBackground(_ :)))
         self.view.addGestureRecognizer(tap)
         
@@ -59,16 +55,15 @@ class RouteSaveBox: BaseViewController {
         self.removeFromParent()
         self.view.removeFromSuperview()
     }
-    
-    func textViewDidChange(_ textView: UITextView) {
-        textView.checkPlaceholder()
-    }
-
 
     @IBAction func saveRoute(_ sender: Any) {
-        descBox.resignFirstResponder()
-        gHomeVC.endRoute(desc: descBox.text!)
+        if nameBox.text?.trimmingCharacters(in: .whitespacesAndNewlines).count == 0 {
+            return
+        }
+        nameBox.resignFirstResponder()
+        gHomeVC.startLocationRecording(name: nameBox.text!)
         dismissDialog()
+        
     }
     
     func dismissDialog() {
