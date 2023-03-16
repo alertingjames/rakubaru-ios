@@ -412,7 +412,7 @@ class HomeViewController: BaseViewController, CLLocationManagerDelegate, GMSMapV
             endedTime = Date().currentTimeMillis()
             let color = getColorFromSpeed(speed: mSpeed).htmlRGBColor
             
-            if h >= 8 && m >= 15 {
+            if h >= 12 && m >= 15 {
                 self.finalizeReport(is8hours: true)
                 return
             }
@@ -535,7 +535,6 @@ class HomeViewController: BaseViewController, CLLocationManagerDelegate, GMSMapV
             self.addChild(routeNameInputBox)
             self.view.addSubview(routeNameInputBox.view)
         }
-        
         checkDevice(member_id: thisUser.idx, device: getDeviceID())
         
     }
